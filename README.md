@@ -42,7 +42,7 @@ export GITHUB_TOKEN="your_personal_access_token"
 
 **Standard (only shows discrepancies and summary):**
 
-```
+```text
 time=2025-04-29T13:09:59.837+02:00 level=WARN msg="Discrepancy found" tag=v1.2.0 github_commit=abc123def proxy_commit=xyz789abc github_date=2023-02-15T12:00:00Z proxy_time=2023-02-15T12:10:00Z
 time=2025-04-29T13:09:59.837+02:00 level=INFO msg="Check complete" tags_checked_on_proxy=30 discrepancies_found=1
 time=2025-04-29T13:09:59.837+02:00 level=ERROR msg="Exiting with non-zero status due to discrepancies found."
@@ -50,7 +50,7 @@ time=2025-04-29T13:09:59.837+02:00 level=ERROR msg="Exiting with non-zero status
 
 **Verbose (shows all tags checked and detailed processing):**
 
-```
+```text
 time=2025-04-29T13:09:58.586+02:00 level=DEBUG msg="Starting tag processing phase" eligible_count=3 limit=3 failfast=false
 time=2025-04-29T13:09:58.586+02:00 level=DEBUG msg="Determined module path for check" tag=v2.71.2 major=v2 module_path=github.com/cli/cli/v2 source="default (v2)"
 time=2025-04-29T13:09:59.078+02:00 level=DEBUG msg="Found version via proxy" proxy=https://proxy.golang.org
@@ -62,7 +62,7 @@ time=2025-04-29T13:09:59.837+02:00 level=INFO msg="No discrepancies found."
 
 **With detected discrepancies in verbose mode:**
 
-```
+```text
 time=2025-04-29T13:09:59.078+02:00 level=DEBUG msg="Tag versions match" tag=v2.71.2 github_commit=fb97b3ef... github_date=2025-04-24T16:41:14Z proxy_commit=fb97b3ef... proxy_time=2025-04-24T16:41:14Z
 time=2025-04-29T13:09:59.472+02:00 level=WARN msg="Discrepancy found" tag=v2.71.1 github_commit=c378b18a... github_date=2025-04-24T13:27:27Z proxy_commit=def456... proxy_time=2025-04-24T13:27:27Z
 time=2025-04-29T13:09:59.837+02:00 level=INFO msg="Check complete" tags_checked_on_proxy=3 discrepancies_found=1
@@ -74,3 +74,9 @@ time=2025-04-29T13:09:59.837+02:00 level=ERROR msg="Exiting with non-zero status
 The tool optimizes GitHub API usage by stopping tag fetching once the specified limit is reached. This is particularly useful for repositories with many tags when you only need to check the most recent ones.
 
 For example, using `-limit 50` will fetch only enough tags to find 50 eligible ones, saving API calls and processing time.
+
+## TODO
+
+* [ ] Add support for checking local git tags against the remote repository, and then check the discrepancies against the Go proxy.
+
+> Tip: `diff <(git show-ref --tags | sort) <(git ls-remote --tags origin | sort)` for local tags diff against remote tags.
