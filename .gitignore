@@ -23,3 +23,13 @@ go.work.sum
 
 # env file
 .env
+.envrc
+
+# binaries
+checker
+main
+
+
+# Workspace files
+TODO.md
+tmp/

@@ -1,0 +1,57 @@
+# This file contains all available configuration options
+# with their default values (in comments).
+#
+# This file is not a configuration example,
+# it contains the exhaustive configuration with explanations of the options.
+
+# Defines the configuration version.
+# The only possible value is "2".
+version: "2"
+
+linters:
+  # The value can be: `standard`, `all`, `none`, or `fast`.
+  # Default: standard
+  default: all
+  disable:
+    - depguard
+    - exhaustruct
+    - funlen
+    - gochecknoglobals
+    - paralleltest
+
+  # All available settings of specific linters.
+  # settings:
+
+  # Defines a set of rules to ignore issues.
+  # It does not skip the analysis, and so does not ignore "typecheck" errors.
+  # exclusions:
+
+formatters:
+  # Enable specific formatter.
+  # Default: [] (uses standard Go formatting)
+  enable:
+    - gci
+    - gofmt
+    - gofumpt
+    - goimports
+    - golines
+
+  settings:
+    gofumpt:
+      module-path: github.com/kakkoyun/github-tag-go-modules-checker
+
+    goimports:
+      local-prefixes:
+        - github.com/kakkoyun/github-tag-go-modules-checker
+
+issues:
+  # Fix found issues (if it's supported by the linter).
+  # Default: false
+  fix: true
+
+# Options for analysis running.
+run:
+  # Timeout for total work, e.g. 30s, 5m, 5m30s.
+  # If the value is lower or equal to 0, the timeout is disabled.
+  # Default: 0 (disabled)
+  timeout: 5m
